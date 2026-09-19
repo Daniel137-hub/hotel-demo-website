@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumina Hotels | Luxury Stay</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a46a; --dark:#0f172a; --light:#f8fafc; --text:#334155;}
+*{margin:0; padding:0; box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif; color:var(--text); line-height:1.6;}
+h1,h2,h3{font-family:'Playfair Display',serif; color:var(--dark);}
+a{text-decoration:none; color:inherit; transition:color .3s ease;}
+.container{max-width:1200px; margin:auto; padding:0 20px;}
+
+/* NAV */
+nav{position:sticky; top:0; z-index:100; background:rgba(255,255,255,.95); backdrop-filter:blur(10px); display:flex; justify-content:space-between; align-items:center; padding:16px 5%; box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.logo{font-weight:800; font-size:22px; display:flex; align-items:center; gap:10px;}
+.logo span{color:var(--gold);}
+.menu{display:flex; gap:30px; list-style:none; font-weight:600;}
+.menu a:hover{color:var(--gold);}
+.btn-gold{background:var(--gold); color:white; padding:10px 22px; border-radius:8px; border:0; cursor:pointer; font-weight:600; transition:background-color .3s ease, transform .3s ease, box-shadow .3s ease;}
+.btn-gold:hover{background:#b58d52; transform:translateY(-2px); box-shadow:0 6px 14px rgba(15,23,42,.15);}
+.hamburger{display:none; font-size:24px; cursor:pointer; transition:color .3s ease, transform .3s ease;}
+.hamburger:hover{color:var(--gold); transform:scale(1.08);}
+
+/* HERO */
+.hero{height:88vh; background:linear-gradient(rgba(15,23,42,.75), rgba(15,23,42,.55)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070'); background-size:cover; background-position:center; display:flex; align-items:center; color:white; text-align:left; padding:0 5%;}
+.hero h1{font-size:56px; color:white; line-height:1.1; max-width:600px;}
+.hero p{max-width:500px; margin:18px 0 28px; font-size:18px; opacity:.9;}
+.hero .cta{display:flex; gap:14px; flex-wrap:wrap;}
+.btn-outline{border:2px solid white; padding:10px 22px; border-radius:8px; color:white; background:transparent; cursor:pointer; font-weight:600; transition:background-color .3s ease, color .3s ease, transform .3s ease;}
+.btn-outline:hover{background:white; color:var(--dark); transform:translateY(-2px);}
+
+/* SERVICES */
+section{padding:80px 0;}
+.sec-head{text-align:center; margin-bottom:50px;}
+.sec-head p{max-width:600px; margin:10px auto 0; color:#64748b;}
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.card{background:white; padding:30px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,.06); text-align:center; transition:transform .3s ease, box-shadow .3s ease;}
+.card:hover{transform:translateY(-6px); box-shadow:0 14px 34px rgba(0,0,0,.1);}
+.card .icon{width:60px; height:60px; background:#fdf2e9; color:var(--gold); border-radius:50%; display:grid; place-items:center; margin:0 auto 14px; font-size:26px;}
+.card ul{text-align:left; margin-top:12px; list-style:disc; padding-left:18px; font-size:14px;}
+
+/* ROOMS */
+.rooms{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.room{background:white; border-radius:16px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.06); transition:transform .3s ease, box-shadow .3s ease;}
+.room:hover{transform:translateY(-6px); box-shadow:0 14px 34px rgba(0,0,0,.1);}
+.room img{width:100%; height:220px; object-fit:cover; transition:transform .5s ease;}
+.room:hover img{transform:scale(1.04);}
+.room-body{padding:20px;}
+.room-body h3{margin-bottom:6px;}
+.room-body .price{color:var(--gold); font-weight:700; margin:6px 0;}
+.room-body ul{font-size:14px; padding-left:18px; margin-top:8px;}
+
+/* BOOKING */
+.booking-wrap{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; background:white; padding:30px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,.06);}
+.booking-wrap form{display:grid; gap:16px;}
+input, select{padding:12px 14px; border-radius:10px; border:1px solid #e2e8f0; width:100%; font-size:15px;}
+form button{margin-top:10px;}
+
+/* FOOTER */
+footer{background:var(--dark); color:#cbd5e1; padding:60px 0 20px;}
+.footer-grid{display:grid; grid-template-columns:1.1fr 1.2fr .5fr 1.2fr; gap:30px;}
+footer h4{color:white; margin-bottom:12px;}
+.map{width:100%; height:220px; border:0; border-radius:10px; background:#1e293b;}
+.social{display:flex; gap:12px; margin-top:10px;}
+.social a{width:36px; height:36px; background:#1e293b; display:grid; place-items:center; border-radius:50%; color:white;}
+.copy{text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #1e293b; font-size:13px;}
+
+/* POPUP */
+#popup{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; place-items:center; z-index:200;}
+#popup .box{background:white; padding:30px; border-radius:16px; text-align:center; max-width:400px; width:90%;}
+#popup .box h3{margin-bottom:10px;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .menu{display:none;} nav > .btn-gold{display:none;} .hamburger{display:block;}
+  .cards, .rooms, .booking-wrap, .footer-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:36px;}
+  nav.active .menu{display:flex; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:white; padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">▲ <span>LUMINA</span> HOTELS</div>
+  <ul class="menu">
+    <li><a href="#home" onclick="navbar.classList.remove('active')">Home</a></li>
+    <li><a href="#services" onclick="navbar.classList.remove('active')">Service</a></li>
+    <li><a href="#rooms" onclick="navbar.classList.remove('active')">Rooms</a></li>
+    <li><a href="#booking" onclick="navbar.classList.remove('active')">Booking</a></li>
+  </ul>
+  <button class="btn-gold" onclick="document.querySelector('footer').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+  <div class="hamburger" onclick="navbar.classList.toggle('active')">☰</div>
+</nav>
+
+<section class="hero" id="home">
+  <div>
+    <h1>Experience Luxury, <br>Book Your Perfect Stay</h1>
+    <p>Discover world-class comfort and exceptional service at Lumina Hotels. Where modern elegance meets warm hospitality — your unforgettable getaway starts here.</p>
+    <div class="cta">
+      <button class="btn-gold" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Room Now</button>
+      <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Services</button>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Our Premium Services</h2>
+      <p>We provide exceptional services to make your stay unforgettable, comfortable and truly luxurious.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🍽️</div>
+        <h3>Fine Dining Restaurant</h3>
+        <p>Multi-cuisine restaurant with chef's special menu</p>
+        <ul><li>24/7 Room Service</li><li>Buffet Breakfast & Dinner</li><li>Local & Continental Dishes</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon">💆</div>
+        <h3>Spa & Wellness</h3>
+        <p>Relax and rejuvenate your body and mind</p>
+        <ul><li>Luxury Spa Treatments</li><li>Sauna & Steam Room</li><li>Outdoor Infinity Pool</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon">🛎️</div>
+        <h3>24/7 Concierge</h3>
+        <p>Dedicated team for personalized assistance anytime</p>
+        <ul><li>Airport Pickup & Drop</li><li>City Tour Guide</li><li>Laundry & Business Center</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" style="background:#f8fafc;">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Featured Rooms & Suites</h2>
+      <p>Choose from our carefully designed rooms that blend comfort, style and luxury.</p>
+    </div>
+    <div class="rooms">
+      <div class="room">
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80" alt="Classic hotel room with a queen bed">
+        <div class="room-body">
+          <h3>Classic Room</h3>
+          <p>Perfect for solo or business travelers seeking comfort.</p>
+          <p class="price">$120 / Night</p>
+          <ul><li>1 Queen Bed • 25m²</li><li>Free WiFi & Smart TV</li><li>City View</li></ul>
+        </div>
+      </div>
+      <div class="room">
+        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800" alt="Deluxe">
+        <div class="room-body">
+          <h3>Deluxe Suite</h3>
+          <p>Spacious elegance with premium amenities and balcony.</p>
+          <p class="price">$280 / Night</p>
+          <ul><li>1 King Bed • 45m² • Balcony</li><li>Mini-Bar & Work Desk</li><li>Sea View</li></ul>
+        </div>
+      </div>
+      <div class="room">
+        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800" alt="Presidential">
+        <div class="room-body">
+          <h3>Presidential Villa</h3>
+          <p>Ultimate luxury with private pool and personal butler.</p>
+          <p class="price">$650 / Night</p>
+          <ul><li>4 Beds • 120m² • Private Pool</li><li>Jacuzzi & Living Area</li><li>Panoramic View</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="container">
+    <div class="sec-head"><h2>Reserve Your Stay</h2><p>Complete the form to secure your reservation instantly.</p></div>
+    <div class="booking-wrap">
+      <form id="bookingForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <label>Check-in Date<input type="date" id="checkin" required></label>
+        <label>Check-out Date<input type="date" id="checkout" required></label>
+        <select id="roomType" required>
+          <option value="">Select Room Type</option>
+          <option>Classic Room - $120/night</option>
+          <option>Deluxe Suite - $280/night</option>
+          <option>Presidential Villa - $650/night</option>
+        </select>
+        <button type="submit" class="btn-gold">Confirm Booking</button>
+      </form>
+      <div>
+        <h3>Why Book Direct?</h3><br>
+        <p>✓ Best Price Guarantee<br>✓ Free Cancellation 24h Before<br>✓ Complimentary Breakfast<br>✓ Early Check-in Available</p><br>
+        <iframe class="map" src="https://maps.google.com/maps?q=Dodoma,%20Tanzania&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container footer-grid">
+    <div>
+      <h4>Lumina Hotels</h4>
+      <p>Luxury hospitality redefined for the modern traveler. Where every stay becomes a story.</p><br>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>📧 reservation@luminahotels.com<br>📍 123 Harbour Avenue, Dodoma, TZ<br>📞 +255 743 000 000</p>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <!-- <div class="social">
+        <a href="#">f</a><a href="#">ig</a><a href="#">t</a>
+      </div> -->
+      <p style="margin-top:12px;">Facebook <br> Instagram <br> Twitter</p>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <p>Subscribe for exclusive offers</p>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <input type="email" placeholder="Your email" style="flex:1;">
+        <button class="btn-gold" style="padding:8px 14px;">Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="copy">© 2026 <a href="https://daniel137-hub.github.io/VineLabs/" target="_blank" rel="noopener noreferrer">Developed by VineLabs</a>. All rights reserved.</div>
+</footer>
+
+<div id="popup"><div class="box"><h3>🎉 Booking Confirmed!</h3><p id="popupMsg">Thank you! We have received your reservation.</p><br><button class="btn-gold" onclick="popup.style.display='none'">Close</button></div></div>
+
+<script>
+const popup = document.getElementById('popup');
+const bookingForm = document.getElementById('bookingForm');
+const bookingEndpoint = 'https://script.google.com/macros/s/AKfycbwCGsVi7SE8knVi3IZJ5ZtfN2oJoLM1Ea1IS3EmyMGcLYrS0eUd1Y9IkFeMYG8fLxtDhQ/exec';
+
+bookingForm.addEventListener('submit', async function(e){
+  e.preventDefault();
+  const submitButton = bookingForm.querySelector('button[type="submit"]');
+  const name = document.getElementById('name').value.trim();
+  const room = document.getElementById('roomType').value;
+  const bookingData = {
+    name,
+    email: document.getElementById('email').value.trim(),
+    checkin: document.getElementById('checkin').value,
+    checkout: document.getElementById('checkout').value,
+    roomType: room
+  };
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Saving Booking...';
+
+  try {
+    await fetch(bookingEndpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=UTF-8'},
+      body: JSON.stringify(bookingData)
+    });
+
+    document.getElementById('popupMsg').textContent = `Thank you, ${name}! Your booking for ${room} has been received. Your confirmation email is on its way.`;
+    popup.style.display='grid';
+    bookingForm.reset();
+  } catch (error) {
+    console.error('Booking submission failed:', error);
+    alert('We could not save your booking. Please check your connection and try again.');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Confirm Booking';
+  }
+});
+</script>
+</body>
+</html>
